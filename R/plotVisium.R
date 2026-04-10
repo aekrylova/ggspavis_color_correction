@@ -286,7 +286,7 @@ plotVisium <- function(spe,
                       col = get("highlight"))) + 
     labs(fill = annotate) + 
     images + points + highlights + 
-    coord_fixed(xlim = xlim, ylim = ylim) + scale_color_manual(NULL, values=c("#A71B4B" "#E5610A" "#F6AD3E" "#FDE896" "#D0F4B1" "#52CFB0" "#0099B5" "#584B9F"))
+    coord_fixed(xlim = xlim, ylim = ylim) + scale_color_manual(NULL, values=c("#A71B4B", "#E5610A", "#F6AD3E", "#FDE896", "#D0F4B1", "#52CFB0", "#0099B5", "#584B9F"))
   
   if (show_axes) {
     p <- p + 
