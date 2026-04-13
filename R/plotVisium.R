@@ -159,10 +159,7 @@ plotVisium <- function(spe,
         length(grep(paste0("^", assay, "$"), assayNames(spe))) == 1)
       df[[annotate]] <- assay(spe, assay)[annotate, ]
     }
-    if (is.numeric(df[[annotate]]) & is.null(pal)) {
-      # for continuous feature, ensure length(pal) == 1 (instead of 0 if NULL)
-      pal <- "rainbow"
-    }
+    
     # get color palette
     pal <- .get_pal(pal, df[[annotate]])
   } else {
@@ -251,34 +248,7 @@ plotVisium <- function(spe,
   }
   
   # color scale
-  scale <- if(annotate != "foo") {
-    if (is.numeric(df[[annotate]])) {
-      if (length(pal) == 1 && 
-          pal %in% c("viridis", "magma", "inferno", "plasma", 
-                     "cividis", "rocket", "mako", "turbo")) {
-        scale_fill_viridis_c(trans = trans, option = pal)
-      } else if (length(pal) == 1 && pal == "rainbow") {
-        scale_fill_gradientn(
-          colors = colorRampPalette(
-            colors = rev(x = brewer.pal(n = 11, name = "Spectral")))(100), 
-          trans = trans, 
-          limits = c(min(df[[annotate]]), max(df[[annotate]])))
-      } else {
-        scale_fill_gradient(low = pal[1], high = pal[2], trans = trans)
-      }
-    } else if (is.factor(df[[annotate]])) {
-      # for categorical feature, automate palette
-      if (is.null(pal)) {
-        scale_fill_manual(
-          name = annotate, 
-          values = hue_pal()(length(unique(df[[annotate]]))))
-      } else if (!is.null(pal)) {
-        scale_fill_manual(values = pal)
-      }
-    }
-  } else {
-    scale_fill_identity()
-  }
+  scale <- scale_fill_manual(values = pal)
   
   # display plot
   p <- ggplot(df, aes(get(x_coord), get(y_coord), 
@@ -286,7 +256,7 @@ plotVisium <- function(spe,
                       col = get("highlight"))) + 
     labs(fill = annotate) + 
     images + points + highlights + 
-    coord_fixed(xlim = xlim, ylim = ylim) + scale_color_manual(NULL, values=c("#A71B4B", "#E5610A", "#F6AD3E", "#FDE896", "#D0F4B1", "#52CFB0", "#0099B5", "#584B9F"))
+    coord_fixed(xlim = xlim, ylim = ylim) + scale
   
   if (show_axes) {
     p <- p + 
