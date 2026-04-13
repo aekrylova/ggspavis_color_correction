@@ -1,35 +1,4 @@
 .get_pal <- function(pal, val) {
-  
-  if (length(pal) == 1) {
-    pal <- switch(pal, 
-      "libd_layer_colors" = c(
-        "#F0027F", "#377EB8", "#4DAF4A", "#984EA3", 
-        "#FFD700", "#FF7F00", "#1A1A1A", "#666666"), 
-      "Okabe-Ito" = c(
-        "#000000", "#E69F00", "#56B4E9", "#009E73", 
-        "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), 
-      # use 'scale_fill_viridis_c' for the following options
-      "viridis" = pal, 
-      "magma" = pal, 
-      "inferno" = pal, 
-      "plasma" = pal, 
-      "viridis" = pal, 
-      "cividis" = pal, 
-      "rocket" = pal, 
-      "mako" = pal, 
-      "turbo" = pal, 
-      "rainbow" = pal, 
-      # for a single color name, combine with "gray95" for continuous color scale
-      c("gray95", pal)
-    )
-  }
-  
-  # if length(pal) == 0 (i.e. 'pal' is NULL), leave 'pal' unchanged and the
-  # plotting functions will select default palettes instead
-  
-  # if length(pal) > 1, use 'pal' as provided (e.g. multiple colors for discrete
-  # labels, or length 2 for continuous gradient)
-  
   return(pal)
 }
 
