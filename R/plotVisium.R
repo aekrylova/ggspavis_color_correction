@@ -229,7 +229,7 @@ plotVisium <- function(spe,
     points <- list(
       guides(fill = guide(
         title = annotate, order = 1, override.aes = list(col = NA, size = 3))), 
-      geom_point(shape = point_shape, size = point_size, stroke = 0.25, alpha = 0.8))
+      geom_point(shape = point_shape, color = "black", size = point_size, stroke = 0.25, alpha = 0.8))
     if (!is.null(highlight)) {
       df$highlight <- as.factor(df[[highlight]])
       highlights <- list(
